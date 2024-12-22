@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            color: #343a40;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        td a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        .action-links a {
+            margin-right: 10px;
+        }
+
+        .add-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h2>Intern Management System</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Mobile / Email</th>
+                <th>NIC</th>
+                <th>Training End Date</th>
+                <th>Field</th>
+                <th>Supervisor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intern in interns %}
+            <tr>
+                <td>{{ intern[0] }}</td>
+                <td>{{ intern[1] }}</td>
+                <td>
+                    <strong>Mobile:</strong> {{ intern[2] }}<br>
+                    <strong>Email:</strong> {{ intern[4] }}
+                </td>
+                <td>{{ intern[3] }}</td>
+                <td>{{ intern[6] }}</td>
+                <td>{{ intern[7] }}</td>
+                <td>{{ intern[8] }}</td>
+                <td class="action-links">
+                    <a href="{{ url_for('update_intern', id=intern[0]) }}">Edit</a>
+                    <a href="{{ url_for('delete_intern', id=intern[0]) }}" onclick="return confirm('Are you sure you want to delete this intern?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_intern') }}" class="add-button">Add New Intern</a>
+</body>
+</html>
