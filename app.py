@@ -9,8 +9,7 @@ DB_CONFIG = {
     "dbname": "intern_management",
     "user": "intern_management_user",
     "password": "XChpmRsUyOVX3CZ6apsTM2vIl35gGlQE",
-    "host": "dpg-ctk6o3i3esus73e6a18g-a.oregon-postgres.render.com",
-    "port": 5432
+    "host": "dpg-ctk6o3i3esus73e6a18g-a.oregon-postgres.render.com"
 }
 
 # Database Connection
