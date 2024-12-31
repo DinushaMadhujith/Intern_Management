@@ -9,11 +9,41 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f8f9fa;
+            background: linear-gradient(to top, #4a90e2, #d6e9ff);
         }
 
         h2 {
             color: #343a40;
             text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3;
         }
 
         table {
@@ -62,7 +92,7 @@
             width: 200px;
             margin: 20px auto;
             padding: 10px;
-            background-color: #28a745;
+            background-color:  #007bff;
             color: white;
             text-align: center;
             text-decoration: none;
@@ -71,12 +101,18 @@
         }
 
         .add-button:hover {
-            background-color: #218838;
+            background-color: #0056b3
         }
     </style>
 </head>
 <body>
     <h2>Intern Management System</h2>
+    <div class="search-container">
+        <form method="POST" action="{{ url_for('search_intern') }}" style="text-align: center; margin-bottom: 20px;">
+            <input type="text" name="search_nic" placeholder="Enter NIC to search" required>
+            <button type="submit">Search</button>
+        </form>        
+    </div>
     <table>
         <thead>
             <tr>
