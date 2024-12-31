@@ -136,7 +136,32 @@ def delete_intern(id):
         flash(f"Error: {str(e)}", "error")
     return redirect(url_for("home"))
 
+@app.route("/search", methods=["GET", "POST"])
+def search_intern():
+    search_nic = request.form.get("search_nic", "").strip()  # NIC value from form
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, name, mobile, nic, email, training_start_date, training_end_date,
+                   field_of_specialization, supervisor, target_date
+            FROM interns
+            WHERE nic = %s;
+        """, (search_nic,))
+        intern = cur.fetchone()  # Fetch the record
+        cur.close()
+        conn.close()
+        if intern:
+            return render_template("search_results.html", intern=intern)
+        else:
+            flash("No intern found with the given NIC.", "error")
+            return redirect(url_for("home"))
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+
 
 # Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
+
