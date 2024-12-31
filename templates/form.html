@@ -4,75 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ 'Update Intern' if intern else 'Add Intern' }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: flex;
+            margin: 0;
+            background: linear-gradient(to top, #4a90e2, #d6e9ff);
+        }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>{{ 'Update Intern' if intern else 'Create Trainee' }}</h2>
-    <form method="POST" action="{{ url_for('update_intern', id=intern[0]) if intern else url_for('add_intern') }}">
-        <!-- Name Field -->
-        Name: <br>
-        <input type="text" name="name" value="{{ intern[1] if intern else '' }}" required><br><br>
+    <div class="form-container">
+        <h2>{{ 'Update Intern' if intern else 'Create Trainee' }}</h2>
+        <form method="POST" action="{{ url_for('update_intern', id=intern[0]) if intern else url_for('add_intern') }}">
+            <!-- Name Field -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ intern[1] if intern else '' }}" required>
 
-        <!-- Mobile Field -->
-        Mobile: <br>
-        <input type="text" name="mobile" value="{{ intern[2] if intern else '' }}" required><br><br>
+            <!-- Mobile Field -->
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile" value="{{ intern[2] if intern else '' }}" required>
 
-        <!-- NIC Field -->
-        NIC: <br>
-        <input type="text" name="nic" value="{{ intern[3] if intern else '' }}" {{ 'readonly' if intern else '' }} required><br><br>
+            <!-- NIC Field -->
+            <label for="nic">NIC:</label>
+            <input type="text" id="nic" name="nic" value="{{ intern[3] if intern else '' }}" {{ 'readonly' if intern else '' }} required>
 
-        <!-- Email Field -->
-        Email: <br>
-        <input type="email" name="email" value="{{ intern[4] if intern else '' }}" required><br><br>
+            <!-- Email Field -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ intern[4] if intern else '' }}" required>
 
-        <!-- Address Field -->
-        Address: <br>
-        <input type="text" name="address" value="{{ intern[5] if intern else '' }}"><br><br>
+            <!-- Address Field -->
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ intern[5] if intern else '' }}">
 
-        <!-- Training Start Date -->
-        Training Start Date: <br>
-        <input type="date" name="start_date" value="{{ intern[6] if intern else '' }}"><br><br>
+            <!-- Training Start Date -->
+            <label for="start_date">Training Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ intern[6] if intern else '' }}">
 
-        <!-- Training End Date -->
-        Training End Date: <br>
-        <input type="date" name="end_date" value="{{ intern[7] if intern else '' }}"><br><br>
+            <!-- Training End Date -->
+            <label for="end_date">Training End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ intern[7] if intern else '' }}">
 
-        <!-- Institute -->
-        Institute: <br>
-        <input type="text" name="institute" value="{{ intern[8] if intern else '' }}"><br><br>
+            <!-- Institute -->
+            <label for="institute">Institute:</label>
+            <input type="text" id="institute" name="institute" value="{{ intern[8] if intern else '' }}">
 
-        <!-- Languages Known -->
-        Languages Known: <br>
-        <input type="text" name="languages" value="{{ intern[9] if intern else '' }}"><br><br>
+            <!-- Languages Known -->
+            <label for="languages">Languages Known:</label>
+            <input type="text" id="languages" name="languages" value="{{ intern[9] if intern else '' }}">
 
-        <!-- Field of Specialization -->
-        <label>Field of Specialization:</label><br>
-        <select name="field" required>
-            <option value="QA" {{ 'selected' if intern and intern[10] == 'QA' else '' }}>QA</option>
-            <option value="Python" {{ 'selected' if intern and intern[10] == 'Python' else '' }}>Python</option>
-            <option value="Java" {{ 'selected' if intern and intern[10] == 'Java' else '' }}>Java</option>
-            <option value="PHP" {{ 'selected' if intern and intern[10] == 'PHP' else '' }}>PHP</option>
-        </select><br><br>
+            <!-- Field of Specialization -->
+            <label for="field">Field of Specialization:</label>
+            <select id="field" name="field" required>
+                <option value="QA" {{ 'selected' if intern and intern[10] == 'QA' else '' }}>QA</option>
+                <option value="Python" {{ 'selected' if intern and intern[10] == 'Python' else '' }}>Python</option>
+                <option value="Java" {{ 'selected' if intern and intern[10] == 'Java' else '' }}>Java</option>
+                <option value="PHP" {{ 'selected' if intern and intern[10] == 'PHP' else '' }}>PHP</option>
+            </select>
 
-        <!-- Supervisor -->
-        <label>Supervisor:</label><br>
-        <select name="supervisor" required>
-            <option value="Mr.Giridaran" {{ 'selected' if intern and intern[11] == 'Mr.Giridaran' else '' }}>Mr.Giridaran</option>
-            <option value="Gimnath" {{ 'selected' if intern and intern[11] == 'Gimnath' else '' }}>Gimnath</option>
-            <option value="Chinthaka" {{ 'selected' if intern and intern[11] == 'Chinthaka' else '' }}>Chinthaka</option>
-        </select><br><br>
+            <!-- Supervisor -->
+            <label for="supervisor">Supervisor:</label>
+            <select id="supervisor" name="supervisor" required>
+                <option value="Mr.Giridaran" {{ 'selected' if intern and intern[11] == 'Mr.Giridaran' else '' }}>Mr.Giridaran</option>
+                <option value="Gimnath" {{ 'selected' if intern and intern[11] == 'Gimnath' else '' }}>Gimnath</option>
+                <option value="Chinthaka" {{ 'selected' if intern and intern[11] == 'Chinthaka' else '' }}>Chinthaka</option>
+            </select>
 
-        <!-- Assigned Work -->
-        Assigned Work: <br>
-        <input type="text" name="assigned_work" value="{{ intern[12] if intern else '' }}"><br><br>
+            <!-- Assigned Work -->
+            <label for="assigned_work">Assigned Work:</label>
+            <input type="text" id="assigned_work" name="assigned_work" value="{{ intern[12] if intern else '' }}">
 
-        <!-- Target Date -->
-        Target Date: <br>
-        <input type="date" name="target_date" value="{{ intern[13] if intern else '' }}"><br><br>
+            <!-- Target Date -->
+            <label for="target_date">Target Date:</label>
+            <input type="date" id="target_date" name="target_date" value="{{ intern[13] if intern else '' }}">
 
-        <!-- Submit Button -->
-        <button type="submit">{{ 'Update' if intern else 'Create' }}</button>
-    </form>
-    <br>
-    <a href="{{ url_for('home') }}">Back to List</a>
+            <!-- Submit Button -->
+            <button type="submit">{{ 'Update' if intern else 'Create' }}</button>
+        </form>
+        <a href="{{ url_for('home') }}">Back to List</a>
+    </div>
 </body>
 </html>
